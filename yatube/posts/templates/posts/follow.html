@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Последние обновления избранных авторов{% endblock %}
+{% block header %}Последние обновления избранных авторов{% endblock %}
+{% block content %}
+
+<div class="container">
+  {% include "misc/menu.html" with follow=True %}
+
+  {% for post in page %}
+  {% include "posts/card_post.html" %}
+  {% endfor %}
+
+  {% include "misc/paginator.html" %}
+</div>
+
+{% endblock %}

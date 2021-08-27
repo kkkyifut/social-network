@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block title %}
+{% if post.pk %}
+Редактирование записи
+{% else %}
+Новая запись
+{% endif %}
+{% endblock %}
+{% block content %}
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-md-3 mb-3 mt-1">
+      {% include "posts/card_profile.html" %}
+    </div>
+    <div class="col-md-9">
+      {% if post.pk %}
+      <div class="card mb-3 mt-1 shadow-sm">
+        <div class="card-body">
+          <p class="card-text">
+            <a href="{% url 'posts:profile' user.username %}">
+              <strong class="d-block text-gray-dark">
+                @{{ user.username }}
+              </strong>
+            </a>
+          <p>{{ post.text|linebreaksbr }}</p>
+          </p>
+          {% thumbnail post.image "960x339" crop="center" upscale=True as im %}
+          <img class="card-img" src="{{ im.url }}">
+          {% endthumbnail %}
+          <hr>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+            </div>
+            <small class="text-muted">{{ post.pub_date|date:"d E Y" }} г.</small>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      {% endif %}
+      <div class="card mb-3 mt-1 shadow-sm">
+        {% url 'edit' as action_url %}
+        <div class="card-header">
+          {% if post.pk %}
+          Редактирование записи
+          {% else %}
+          Новая запись
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <form method="POST" enctype="multipart/form-data" action="{{ action_url }}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="page-link">Сохранить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
