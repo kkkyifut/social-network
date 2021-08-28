@@ -33,12 +33,17 @@
             </a>
           </h5>
           <p>{{ comment.text|linebreaksbr }}</p>
-          <small class="text-muted">{{ comment.created|date:"H:i, d.m.Y " }}</small>
-          {% if comment.author == request.user %}
-          <a class="btn btn-sm text-muted" href="{% url 'posts:delete_comment' author post.pk comment.pk %}" role="button">
-            Удалить комментарий
-          </a>
-          {% endif %}
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group ">
+              {% if comment.author == request.user %}
+              <a class="btn btn-sm text-muted" href="{% url 'posts:delete_comment' author post.pk comment.pk %}"
+                role="button">
+                Удалить комментарий
+              </a>
+              {% endif %}
+            </div>
+            <small class="text-muted">{{ comment.created|date:"H:i, d.m.Y" }}</small>
+          </div>
         </div>
       </div>
       {% endfor %}

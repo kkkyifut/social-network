@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Сторонние приложения
+    'drf_yasg',
     'sorl.thumbnail',
     'debug_toolbar',
     'rest_framework',
@@ -168,3 +169,5 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
     'BLACKLIST_AFTER_ROTATION': False,
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
