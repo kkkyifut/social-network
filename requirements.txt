@@ -26,3 +26,4 @@ djangorestframework
 djangorestframework-simplejwt
 pillow
 djoser
+drf-yasg
