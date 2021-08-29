@@ -32,8 +32,14 @@
         </a>
         {% block comment %}
         {% if user == author %}
+        <a class="btn btn-sm text-muted">
+          |
+        </a>
         <a class="btn btn-sm text-muted" href="{% url 'posts:edit' user post.pk %}" role="button">
           Редактировать
+        </a>
+        <a class="btn btn-sm text-muted">
+          |
         </a>
         <a class="btn btn-sm text-muted" href="{% url 'posts:delete_post' user post.pk %}" role="button">
           Удалить
