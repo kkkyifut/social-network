@@ -80,11 +80,26 @@ def post_view(request, username, post_id) -> HttpResponse:
     return render(request, 'posts/post.html', context)
 
 
-def delete_comment(request, post_id, username, comment_id) -> HttpResponse:
+@login_required
+def delete_post(request, username, post_id) -> HttpResponse:
+    """view-функция для удаления поста"""
+    author = get_object_or_404(User, username=username)
+    if author == request.user:
+        post = get_object_or_404(Post, id=post_id, author__username=username)
+        post.delete()
+    return HttpResponseRedirect(
+        reverse('posts:profile', args=(author,))
+    )
+
+
+@login_required
+def delete_comment(request, username, post_id, comment_id) -> HttpResponse:
     """view-функция для удаления комментария"""
-    post = get_object_or_404(Post, id=post_id, author__username=username)
-    comment = Comment.objects.get(id=comment_id)
-    comment.delete()
+    author = get_object_or_404(User, username=username)
+    if author == request.user:
+        post = get_object_or_404(Post, id=post_id, author__username=username)
+        comment = Comment.objects.get(id=comment_id)
+        comment.delete()
     return HttpResponseRedirect(
         reverse('posts:post', args=(post.author, post.pk))
     )
