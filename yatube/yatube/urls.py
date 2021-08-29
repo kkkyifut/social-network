@@ -16,6 +16,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('users.urls')),
     path('auth/', include('django.contrib.auth.urls')),
+    path('auth/', include('social_django.urls', namespace='social')),
+    path('captcha/', include('captcha.urls')),
     path('api/', include('api.urls', namespace='api-v1')),
 ]
 

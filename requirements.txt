@@ -27,3 +27,5 @@ djangorestframework-simplejwt
 pillow
 djoser
 drf-yasg
+django-simple-captcha==0.5.*
+social-auth-app-django

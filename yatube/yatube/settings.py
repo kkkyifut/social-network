@@ -31,14 +31,13 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
-    # Приложения django
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Сторонние приложения
     'drf_yasg',
     'sorl.thumbnail',
     'debug_toolbar',
@@ -46,9 +45,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     'api',
-    # Наши приложения
+    'captcha',
+    'social_django',
     'posts',
-    'users',
     'about',
 ]
 
@@ -78,6 +77,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -171,3 +172,22 @@ SIMPLE_JWT = {
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
+}
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.vk.VKOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = '7938261'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'A7YRmo2kFZgyIMCvT0Y8'
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
