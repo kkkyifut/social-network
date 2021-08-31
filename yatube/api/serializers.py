@@ -48,7 +48,7 @@ class FollowSerializer(serializers.ModelSerializer):
         default=serializers.CurrentUserDefault(),
         read_only=True, slug_field='username'
     )
-    following = serializers.SlugRelatedField(
+    author = serializers.SlugRelatedField(
         slug_field='username', queryset=User.objects.all()
     )
 
@@ -57,10 +57,10 @@ class FollowSerializer(serializers.ModelSerializer):
         fields = '__all__'
         validators = [UniqueTogetherValidator(
             queryset=Follow.objects.all(),
-            fields=('user', 'following',)
+            fields=('user', 'author',)
         )]
 
-    def validate_following(self, value):
+    def validate_author(self, value):
         if value == self.context['request'].user:
             raise serializers.ValidationError()
         return value

@@ -22,10 +22,10 @@ urllib3==1.25.6           # via requests
 wcwidth==0.1.8            # via pytest
 zipp==2.2.0               # via importlib-metadata
 mixer==7.1.2
-djangorestframework
+djangorestframework==3.11.2
 djangorestframework-simplejwt
 pillow
 djoser
-drf-yasg
+drf-yasg==1.17.*
 django-simple-captcha==0.5.*
 social-auth-app-django
