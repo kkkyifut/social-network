@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'api',
     'captcha',
     'social_django',
+    'crispy_forms',
     'posts',
     'about',
 ]
@@ -191,3 +192,5 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_VK_OAUTH2_KEY = '7938261'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'A7YRmo2kFZgyIMCvT0Y8'
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load thumbnail %}
+{% block title %}Профиль пользователя{% endblock %}
+{% block content %}
+{% load user_filters %}
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-md-3 mb-3 mt-1">
+      {% include "posts/card_profile.html" %}
+      <br>
+      {% include "posts/card_message.html" %}
+    </div>
+    <div class="col-md-9">
+      {% if user.is_authenticated %}
+      <div class="card my-4">
+        {% url 'send_message' as action_url %}
+        <div class="card-header">Сообщение</div>
+        <div class="card-body">
+          <form method="POST" enctype="multipart/form-data" action="{{ action_url }}" novalidate>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Отправить</button>
+          </form>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</main>
+{% endblock %}

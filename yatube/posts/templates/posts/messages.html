@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Профиль пользователя{% endblock %}
+{% block header %}Сообщения{% endblock %}
 {% block content %}
 {% load user_filters %}
 <main role="main" class="container">
@@ -10,8 +11,8 @@
       {% include "posts/card_message.html" %}
     </div>
     <div class="col-md-9">
-      {% for post in page %}
-      {% include "posts/card_post.html" %}
+      {% for message in page %}
+      {% include "posts/card_one_message.html" %}
       {% endfor %}
       {% include "misc/paginator.html" %}
     </div>

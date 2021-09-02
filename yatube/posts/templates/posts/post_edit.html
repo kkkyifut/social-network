@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% load thumbnail %}
 {% block title %}
 {% if post.pk %}
@@ -12,6 +13,8 @@
   <div class="row">
     <div class="col-md-3 mb-3 mt-1">
       {% include "posts/card_profile.html" %}
+      <br>
+      {% include "posts/card_message.html" %}
     </div>
     <div class="col-md-9">
       {% if post.pk %}
@@ -48,10 +51,10 @@
           {% endif %}
         </div>
         <div class="card-body">
-          <form method="POST" enctype="multipart/form-data" action="{{ action_url }}">
+          <form method="POST" enctype="multipart/form-data" action="{{ action_url }}" novalidate>
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="page-link">Сохранить</button>
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Сохранить</button>
           </form>
         </div>
       </div>

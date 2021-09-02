@@ -49,6 +49,32 @@ class Post(models.Model):
         return self.text[:15]
 
 
+class Message(models.Model):
+    """Модель для сообщений."""
+
+    text = models.TextField(verbose_name="Текст сообщения")
+    dispatched = models.DateTimeField(
+        "sending_date", auto_now_add=True, db_index=True
+    )
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE,
+        related_name="author_messages", verbose_name="Отправитель"
+    )
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE,
+        related_name="user_messages", verbose_name="Получатель"
+    )
+    image = models.ImageField(
+        upload_to="posts/", blank=True, null=True, verbose_name="Изображение"
+    )
+
+    class Meta:
+        ordering = ("-dispatched",)
+
+    def __str__(self) -> str:
+        return self.text[:200]
+
+
 class Comment(models.Model):
     """Модель для комментариев."""
 

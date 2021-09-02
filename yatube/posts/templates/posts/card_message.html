@@ -1,0 +1,23 @@
+<div class="card">
+  {% if author == request.user %}
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <div class="h6 text-muted">
+        Диалогов: {{ dialogues_count }}
+        <br>
+        Сообщений отправлено: {{ author.author_messages.count }}
+        <br>
+        Сообщений получено: {{ author.user_messages.count }}
+        Сообщений всего: {{ messages_count }}
+      </div>
+    </li>
+    <a class="btn btn-lg btn-light" href="{% url 'posts:messages' request.user.username %}" role="button">
+      Перейти в диалоги
+    </a>
+    {% elif request.user.is_authenticated %}
+    <a class="btn btn-lg btn-primary" href="{% url 'posts:send_message' author.username %}" role="button">
+      Написать сообщение
+    </a>
+    {% endif %}
+  </ul>
+</div>

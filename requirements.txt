@@ -29,3 +29,4 @@ djoser
 drf-yasg==1.17.*
 django-simple-captcha==0.5.*
 social-auth-app-django
+django-crispy-forms
